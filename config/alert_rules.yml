@@ -1,0 +1,29 @@
+groups:
+  - name: python_script_alerts
+    rules:
+    - alert: HighExecutionTime
+      expr: script_execution_time_seconds > 0.0001
+      for: 1s
+      labels:
+        severity: critical
+      annotations:
+        summary: "Script execution time is too high"
+        description: "The script is taking more than 0.1 seconds to complete."
+
+    - alert: HighMemoryUsage
+      expr: script_memory_usage_bytes > 5000000  # 5MB
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: "High memory usage detected"
+        description: "Memory usage is above 5MB."
+
+    - alert: ErrorRate
+      expr: script_error_count > 0
+      for: 10s
+      labels:
+        severity: critical
+      annotations:
+        summary: "Script Error"
+        description: "An error has occurred in the script."
